@@ -15,9 +15,19 @@ def create_blur(image):
 def Edge_cascade(image):
     canny = cv.Canny(image,125,175)
     cv.imshow("Canny Edge", canny)
-    cv.dilate(canny,(2,2))
-    cv.waitKey(2000)
 
+    dilated_image = cv.dilate(canny,(2,2),iterations=2)
+    cv.imshow("dilated image",dilated_image)
+    cv.waitKey(1000)
+    
+    eroded_image = cv.erode(canny,(3,3),iterations=3)
+    cv.imshow("eroded_image",eroded_image)
+    cv.waitKey(0)
+    
+    # cropping image 
+    cropped_image  = canny[50:200,200:300]
+    cv.imshow(cropped_image)
+    cv.waitKey(0)
 
 if __name__ == "__main__":
     image = cv.imread("/Users/adarsh/open_cv/Resources/Photos/cat.jpg")
